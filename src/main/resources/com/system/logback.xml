@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- CONSOLE：表示当前的日志信息是可以输出到控制台的。 -->
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%level] %blue(%d{HH:mm:ss.SSS}) %cyan([%thread]) %boldGreen(%logger{15}) - %msg %n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 配置项目包日志级别 -->
+    <logger name="com.itheima" level="DEBUG" additivity="false">
+        <appender-ref ref="Console"/>
+    </logger>
+
+    <!-- 根日志配置（默认输出级别为INFO） -->
+    <root level="INFO">
+        <appender-ref ref="Console"/>
+    </root>
+
+</configuration>

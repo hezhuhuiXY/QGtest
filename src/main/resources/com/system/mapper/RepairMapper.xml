@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.mapper.RepairMapper">
+    <resultMap id="studentResultMap" type="com.system.pojo.Student">
+        <result column="student_id" property="studentId"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+         insert into repair_order(student_id,dorm,content,status)
+        values(#{studentId},#{dorm},#{content},#{status});
+    </insert>
+
+    <update id="updateStatus">
+        update repair_order
+        <set>
+        status=#{status}
+        </set>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+
+    <delete id="deleteByIds">
+        delete from repair_order where id
+        in(
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+        );
+    </delete>
+
+    <select id="selectByStudentId" resultType="com.system.pojo.Repair">
+        select*from repair_order;
+    </select>
+
+    <select id="selectAll" resultType="com.system.pojo.Repair">
+        select * from repair_order;
+    </select>
+
+    <select id="selectByCondition" resultType="com.system.pojo.Repair">
+        select student_id,dorm,status,create_time from repair_order
+        <where>
+            status=#{status}
+        </where>
+    </select>
+
+    <select id="selectById" resultType="com.system.pojo.Repair">
+        select * from repair_order where id=#{id}
+    </select>
+
+</mapper>

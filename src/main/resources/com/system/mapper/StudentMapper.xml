@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.mapper.StudentMapper">
+    <resultMap id="studentResultMap" type="com.system.pojo.Student">
+        <result column="student_id" property="studentId"/>
+    </resultMap>
+
+    <insert id="insert">
+     insert into student_user(student_id,password,dormitory)
+        values(#{studentId},#{password},#{dormitory});
+    </insert>
+    <update id="update">
+        update student_user
+        <set>
+            <if test="password!= null and password!=''">
+                password=#{password}
+            </if>
+            <if test="dormitory!=null and dormitory!=''">
+                dormitory=#{dormitory}
+            </if>
+        </set>
+        <where>
+            student_id=#{studentId} and password=#{password}
+        </where>
+    </update>
+
+    <delete id="deleteById">
+
+    </delete>
+
+    <select id="selectAll" resultType="com.system.pojo.Student">
+        select * from student_user;
+    </select>
+
+    <select id="selectByStudentId" resultMap="studentResultMap">
+        select *
+        from student_user where student_id=#{studentId}
+    </select>
+
+
+</mapper>
