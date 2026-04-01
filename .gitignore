@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Frontend (monorepo under frontend/) ###
+frontend/**/node_modules/
+frontend/**/dist/
